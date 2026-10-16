@@ -1,16 +1,198 @@
-# React + Vite
+\# Electricity Fraud Detection Using Machine Learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A Machine Learning-based web application for detecting potentially fraudulent electricity consumption patterns from historical consumer electricity usage data.
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the Oxlint configuration
+The system analyzes daily electricity consumption patterns and classifies consumers as \*\*Normal\*\* or \*\*Potentially Fraudulent\*\* using a trained Random Forest classifier. The project also provides an interactive web interface for CSV-based predictions and result analysis.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+
+
+\---
+
+
+
+\## Overview
+
+
+
+Electricity theft and abnormal consumption are major challenges for power distribution companies. Identifying suspicious consumption manually becomes difficult when dealing with thousands of consumers and large volumes of historical electricity data.
+
+
+
+This project uses Machine Learning techniques to analyze electricity consumption patterns and identify consumers whose usage behavior may indicate potential fraudulent activity.
+
+
+
+The solution combines:
+
+
+
+\- Data preprocessing
+
+\- Exploratory Data Analysis
+
+\- Feature engineering
+
+\- Class imbalance handling
+
+\- Multiple Machine Learning algorithms
+
+\- Model evaluation and comparison
+
+\- A trained Random Forest model
+
+\- FastAPI backend
+
+\- React-based frontend
+
+\- Real-time CSV-based prediction
+
+
+
+\---
+
+
+
+\## Problem Statement
+
+
+
+\*\*Detection of Potentially Fraudulent Electricity Consumption Patterns Using Machine Learning\*\*
+
+
+
+The objective is to develop a Machine Learning system capable of identifying potentially fraudulent electricity consumption patterns based on historical daily consumption data.
+
+
+
+The system takes consumer electricity consumption data as input and predicts whether the consumption pattern is:
+
+
+
+\- \*\*Normal\*\*
+
+\- \*\*Potentially Fraudulent\*\*
+
+
+
+\---
+
+
+
+\## Dataset
+
+
+
+The project uses the \*\*SGCC (State Grid Corporation of China) electricity consumption dataset\*\*.
+
+
+
+\### Dataset Characteristics
+
+
+
+| Property | Value |
+
+|---|---:|
+
+| Total Records | 25,863 |
+
+| Total Columns | 28 |
+
+| Consumer Identifier | `CONS\_NO` |
+
+| Target Variable | `FLAG` |
+
+| Consumption Features | 26 daily values |
+
+| Normal Consumers | 23,741 |
+
+| Potentially Fraudulent Consumers | 2,122 |
+
+
+
+\### Class Distribution
+
+
+
+| FLAG | Class | Count | Percentage |
+
+|---:|---|---:|---:|
+
+| 0 | Normal | 23,741 | 91.8% |
+
+| 1 | Potentially Fraudulent | 2,122 | 8.2% |
+
+
+
+The dataset is highly imbalanced, with normal consumption patterns forming the majority class.
+
+
+
+\---
+
+
+
+\## Methodology
+
+
+
+The project follows the following Machine Learning pipeline:
+
+
+
+```text
+
+Raw Dataset
+
+&#x20;    ↓
+
+Data Cleaning
+
+&#x20;    ↓
+
+Missing Value Handling
+
+&#x20;    ↓
+
+Exploratory Data Analysis
+
+&#x20;    ↓
+
+Feature Engineering
+
+&#x20;    ↓
+
+Train-Test Split
+
+&#x20;    ↓
+
+Feature Scaling
+
+&#x20;    ↓
+
+Class Imbalance Handling
+
+&#x20;    ↓
+
+Model Training
+
+&#x20;    ↓
+
+Model Evaluation
+
+&#x20;    ↓
+
+Best Model Selection
+
+&#x20;    ↓
+
+Model Serialization
+
+&#x20;    ↓
+
+Web-Based Prediction
+
