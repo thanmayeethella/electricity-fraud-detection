@@ -22,6 +22,8 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+const API_BASE_URL = 'https://electricity-fraud-detection-vf3z.onrender.com';
+
 export default function LiveDetection() {
   const [file, setFile] = useState(null);
   const [parsedData, setParsedData] = useState(null);
@@ -41,7 +43,7 @@ export default function LiveDetection() {
   useEffect(() => {
     const checkHealth = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/health');
+        const res = await fetch(`${API_BASE_URL}/api/health`);
         if (res.ok) {
           const data = await res.json();
           setBackendStatus({ online: true, checking: false, details: data });
@@ -206,7 +208,7 @@ export default function LiveDetection() {
         formData.append('file', blob, parsedData.fileName || 'test.csv');
       }
 
-      const response = await fetch('http://localhost:8000/api/predict', {
+      const response = await fetch(`${API_BASE_URL}/api/predict`, {
         method: 'POST',
         body: formData
       });
@@ -226,7 +228,7 @@ export default function LiveDetection() {
       }
     } catch (error) {
       console.error("Backend error:", error);
-      alert(`Backend Error: ${error.message}\nMake sure the FastAPI server is running with 'uvicorn backend.main:app --port 8000'.`);
+      alert(`Backend Error: ${error.message}\nUnable to connect to the backend server at ${API_BASE_URL}.`);
     } finally {
       setIsProcessing(false);
     }
@@ -389,7 +391,7 @@ export default function LiveDetection() {
               <div className="text-xs text-slate-600 space-y-1.5 font-mono">
                 <div>Artifact: <span className="text-slate-800 font-semibold">random_forest_model.joblib</span></div>
                 <div>Scaler: <span className="text-slate-800 font-semibold">scaler.joblib</span></div>
-                <div>Port: <span className="text-sky-700 font-semibold">http://localhost:8000</span></div>
+                <div>API: <span className="text-sky-700 font-semibold break-all">{API_BASE_URL}</span></div>
               </div>
             </div>
 
@@ -400,7 +402,7 @@ export default function LiveDetection() {
                 </span>
               ) : (
                 <span className="text-rose-700 font-mono text-[10px]">
-                  Run: uvicorn backend.main:app --port 8000
+                  Connecting to {API_BASE_URL}...
                 </span>
               )}
             </div>
